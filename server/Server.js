@@ -12,8 +12,8 @@ class Server{
     }
 
     start(){
-        this.initRoute();
         this.app = express();
+        this.initRoute();
     }
 
     initRoute(){
