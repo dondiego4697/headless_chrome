@@ -11,21 +11,22 @@ class ChromeNavigator {
 
     /**
      * Launch headless Chrome
+     * @param config
      * @param headless
      * @returns {Promise.<void>}
      */
-    async launchChrome(headless = true) {
+    async launchChrome(config = {width: 1920, height: 1080, headless: true}) {
+        const {width, height, headless} = config;
         try {
             this.chrome = await chromeLauncher.launch({
                 // port: 9222,
                 chromeFlags: [
-                    '--window-size=412,732',
+                    `--window-size=${width},${height}`,
                     '--disable-gpu',
                     headless ? '--headless' : ''
                 ]
             });
         } catch (e){
-            console.log(`Exception on launchChrome=${e}`);
             throw e;
         }
     }
@@ -66,32 +67,6 @@ class ChromeNavigator {
             throw e;
         }
     }
-
-
-
-    /*async navigate(chrome) {
-        const protocol = await CDP({port: chrome.port});
-        let {Page, Runtime} = protocol;
-        await Promise.all([Page.enable(), Runtime.enable()]);
-
-        Page.navigate({url: 'https://www.github.com/'});
-
-        // Wait for window.onload before doing stuff.
-        Page.loadEventFired(async () => {
-            //const result = await Runtime.evaluate({expression: "document.querySelector('canvas')"});
-            const snapshot = await Page.captureScreenshot();
-            this.base64Decode(snapshot.data, 'img.png');
-            //console.log('Title of page: ' + result.result.value);
-
-            protocol.close();
-            chrome.kill(); // Kill Chrome.
-        });
-    }
-
-    base64Decode(base64str, file) {
-        let bitmap = new Buffer(base64str, 'base64');
-        fs.writeFileSync(file, bitmap);
-    }*/
 
     getBase64Decode(base64str) {
         return new Buffer(base64str, 'base64');

@@ -1,4 +1,4 @@
-const Server = require('./server/Server');
+const Server = require('./src/server/Server');
 
 let server = new Server();
 server.start();

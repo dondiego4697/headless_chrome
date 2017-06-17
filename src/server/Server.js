@@ -2,7 +2,7 @@
  * Created by denstep on 16.06.2017.
  */
 const express = require('express');
-const router = require('../src/routes/routes');
+const router = require('../routes/routes');
 
 class Server {
     constructor() {
