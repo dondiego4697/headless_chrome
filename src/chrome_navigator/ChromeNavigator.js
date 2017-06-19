@@ -12,7 +12,6 @@ class ChromeNavigator {
     /**
      * Launch headless Chrome
      * @param config
-     * @param headless
      * @returns {Promise.<void>}
      */
     async launchChrome(config = {width: 1920, height: 1080, headless: true}) {
